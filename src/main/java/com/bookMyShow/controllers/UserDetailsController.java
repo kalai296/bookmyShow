@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://127.0.0.1:3000")
+@CrossOrigin(origins = "*")
 public class UserDetailsController {
 
     private UserDetailsService userDetailsService;
@@ -38,12 +38,17 @@ public class UserDetailsController {
             cookie.setMaxAge(999999);
             //cookie.setSecure(true);
             cookie.setHttpOnly(true);
-            cookie.setDomain("http://127.0.0.1:3000");
+            cookie.setDomain("localhost.org");
 
             cookie.setPath("/");
 
             //httpServletResponse.addHeader("Access-Control-Expose-Headers", "set-cookie");
             httpServletResponse.addCookie(cookie);
+            httpServletResponse.addHeader("Access-Control-Allow-Credentials", "true");
+//            httpServletResponse.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS,DELETE");
+//            httpServletResponse.addHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+            //httpServletResponse.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+
         }
 
         return loginResponse;
